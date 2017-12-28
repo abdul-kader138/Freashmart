@@ -1174,4 +1174,16 @@ class Pos_model extends CI_Model
 
     }
 
+    public function getProductByIdAndWH($id,$wh_id)
+    {
+        $q = $this->db->get_where('warehouses_products', array('product_id' => $id,'warehouse_id' => $wh_id), 1);
+        if ($q->num_rows() > 0) {
+            return $q->row();
+        }
+
+        return FALSE;
+    }
+
+
+
 }

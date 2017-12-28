@@ -391,6 +391,13 @@ class Pos extends MX_Controller
                     redirect("module=pos", 'refresh');
                 }
             } else {
+                foreach($items as $item){
+                    $getDetails=$this->pos_model->getProductByIdAndWH($item['product_id'],$warehouse_id);
+                    if($getDetails->quantity<$item['quantity']){
+                        $this->session->set_flashdata('message', "Item(".$item['product_name'].") qty is not available at warehouse");
+                        redirect("module=pos", 'refresh');
+                    }
+                }
                 if ($saleID = $this->pos_model->addSale($saleDetails, $items, $warehouse_id, $did)) {
                     $this->session->set_flashdata('success_message', $this->lang->line("sale_added"));
                     redirect("module=pos&view=view_invoice&id=" . $saleID, 'refresh');

@@ -94,7 +94,7 @@ class Inventories extends MX_Controller
 
     function mrr_list()
     {
-        if ($this->ion_auth->in_group('salesman')) {
+        if ($this->ion_auth->in_group('viewer')) {
             $this->session->set_flashdata('message', $this->lang->line("access_denied"));
             $data['message'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message'));
             redirect('module=home', 'refresh');
@@ -240,6 +240,7 @@ class Inventories extends MX_Controller
             $not_verify = [];
             $All_ready_approved = [];
             $purchase_id = $this->input->post('chk');
+            var_dump($purchase_id);
 
             foreach ($purchase_id as $idvalue) {
                 $p_data = $this->inventories_model->getPurchaseId($idvalue);
@@ -262,7 +263,7 @@ class Inventories extends MX_Controller
                 $ready_approved = implode(',', $All_ready_approved);
                 $this->session->set_flashdata('message', "Following PO already are approved." . $ready_approved);
                 $data['message'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message'));
-                redirect('module=inventories&view=po_content', 'refresh');
+//                redirect('module=inventories&view=po_content', 'refresh');
             }
 
 

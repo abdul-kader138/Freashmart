@@ -72,7 +72,20 @@
 						{ type: "text", bRegex:true },
 						 null, null, null
                      ]});
-				
+
+
+
+                 $('#allcb').change(function(){
+                     if($(this).prop('checked')){
+                         $('tbody tr td input[type="checkbox"]').each(function(){
+                             $(this).prop('checked', true);
+                         });
+                     }else{
+                         $('tbody tr td input[type="checkbox"]').each(function(){
+                             $(this).prop('checked', false);
+                         });
+                     }
+                 });
             });
                     
 </script>
@@ -120,7 +133,7 @@
             <th><?php echo $this->lang->line("grand_total"); ?></th>
             <th>PO Status</th>
             <th>MRR Status</th>
-            <th><?php echo $this->lang->line("actions"); ?></th>
+            <th><?php echo $this->lang->line("actions"); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="allcb" /></th>
 		</tr>
         </thead>
 		<tbody>
